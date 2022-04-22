@@ -9,9 +9,9 @@ pipeline {
     stage('docker build and push') {
       steps {
         sh '''
-        sudo docker build -t rudclthe/testweb:newnewblog blog/Dockerfile
+        sudo docker build -t rudclthe/testweb:newnewblog blog/
         sudo docker push rudclthe/testweb:newnewblog
-	sudo docker build -t rudclthe/testweb:newnewshop shop/Dockerfile
+	sudo docker build -t rudclthe/testweb:newnewshop shop/
 	sudo docker push rudclthe/testweb:newnewshop
         '''
       }

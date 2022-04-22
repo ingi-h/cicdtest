@@ -7,12 +7,12 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      page: jenkins
+      page: jenkins-label
   template:
     metadata:
       name: pod-jenkins
       labels:
-        page: jenkins
+        page: jenkins-label
     spec:
       containers:
       - name: ctn-jenkins
@@ -24,9 +24,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-jenkins
+  name: jenkins-lb
 spec:
-  selector:
-    page: jenkins
   ports:
-  - port: 80
+  - name: jenkins-port
+    targetPort: 80
+    port: 80
+  selector:
+    app: jenkins-label
+  type: LoadBalancer

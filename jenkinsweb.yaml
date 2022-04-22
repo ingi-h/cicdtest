@@ -1,0 +1,32 @@
+# deploy
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-jenkins
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      page: jenkins
+  template:
+    metadata:
+      name: pod-jenkins
+      labels:
+        page: jenkins
+    spec:
+      containers:
+      - name: ctn-jenkins
+        image: nginx
+        ports:
+        - containerPort: 80
+---
+# service
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-jenkins
+spec:
+  selector:
+    page: jenkins
+  ports:
+  - port: 80
